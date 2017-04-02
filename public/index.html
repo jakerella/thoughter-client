@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Thoughter</title>
+
+        <meta name='description' content='A simple demo client for the 'Thoughter' micro blog assignment at The Iron Yard'>
+        <meta name='author' content='Jordan Kasper'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+
+        <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+        <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i' rel='stylesheet'>
+        <link href='/css/style.css' rel='stylesheet'>
+    </head>
+    <body ng-app='thoughter'>
+        <main>
+            <header>
+                <h1>Thoughter</h1>
+            </header>
+
+            <section ng-controller='ThoughtController as tc'>
+                <form class='form-inline' ng-submit='tc.addThought(tc.newThought.content).then(tc.clearNewThought)'>
+                    <input type='text' ng-model='tc.newThought.content' placeholder='What are you thinking?' required class='form-control'>
+                    <input type='submit' value='Post Thought' class='btn btn-success btn-sm'>
+                </form>
+
+                <p class='alert' ng-class='{ "alert-danger": tc.error, "alert-success": !tc.error }' ng-cloak ng-show='tc.message'>
+                    {{tc.message}}
+                </p>
+
+                <section class='recent-thoughts' ng-cloak>
+                    <article class='panel panel-info' ng-repeat='thought in tc.thoughts'>
+                        <p class='panel-heading'>
+                            Posted on {{thought.createTime | date:"MMM d, y"}}
+                        </p>
+
+                        <section class='panel-body'>
+                            {{thought.content}}
+                        </section>
+
+                    </article>
+
+                    <aside class='more'>
+                        <button class='btn btn-primary' ng-click='tc.loadMore()' ng-show='tc.hasMore'>Older Thoughts</button>
+                    </aside>
+                </section>
+            </section>
+
+            <footer>
+                <p>&copy; Jordan Kasper 2017</p>
+            </footer>
+        </main>
+
+        <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js'></script>
+        <script src='/js/thoughter.module.js'></script>
+        <script src='/js/thought.service.js'></script>
+        <script src='/js/thought.controller.js'></script>
+    </body>
+</html>

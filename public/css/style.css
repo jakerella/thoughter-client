@@ -1,0 +1,25 @@
+body {
+    font-family: 'Roboto Condensed', Verdana, Arial, sans-serif;
+}
+
+[ng-cloak] {
+    display: none;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+}
+
+form {
+    text-align: center;
+    margin: 1em 0;
+}
+form.form-inline [type="text"] {
+    max-width: 30em;
+    width: 80%;
+}
+
+.more {
+    text-align: center;
+}
